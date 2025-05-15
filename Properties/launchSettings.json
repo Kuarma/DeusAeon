@@ -1,0 +1,11 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "DeusAeon": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "dotnet_environment": "development"
+      }
+    }
+  }
+}
