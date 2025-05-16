@@ -23,10 +23,12 @@ public class DiscordStartupService : IHostedService
     {
         await _client.LoginAsync(TokenType.Bot, _config["DiscordBotToken:Token"]);
         await _client.StartAsync();
+        _logger.LogInformation("Discord bot started");
     }
     
     public async Task StopAsync(CancellationToken cancellationToken)
     {
         await _client.LogoutAsync();
+        _logger.LogInformation("Discord bot stopped");
     }
 }

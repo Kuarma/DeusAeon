@@ -21,14 +21,15 @@ var builder = Host.CreateDefaultBuilder(args)
     .UseSerilog()
     .ConfigureServices(services =>
     {
+        var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
+        
         services.AddLavalink();
-
-        services.ConfigureLavalink(config =>
+        services.ConfigureLavalink(config=>
         {
-            config.BaseAddress = new Uri("http://128.141.241.128:3436"); //TestIp dont even try :3
+            config.BaseAddress = new Uri($"http://{configuration["Lavalink:Ip"]!}");
             config.ReadyTimeout = TimeSpan.FromSeconds(15);
             config.ResumptionOptions = new LavalinkSessionResumptionOptions(TimeSpan.FromSeconds(60));
-            config.Passphrase = "youshallnotpass";
+            config.Passphrase = configuration["Lavalink:Passphrase"]!;
         });
         
         services.AddSingleton<AudioHandler>();

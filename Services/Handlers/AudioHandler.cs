@@ -19,7 +19,7 @@ public class AudioHandler : InteractionModuleBase<SocketInteractionContext>
     }
 
     [SlashCommand("play", "Play selected song", runMode: RunMode.Async)]
-    public async Task PlaySongAsync(string link)
+    public async Task PlaySongAsync(string query)
     {
         await DeferAsync().ConfigureAwait(false);
         
@@ -29,7 +29,7 @@ public class AudioHandler : InteractionModuleBase<SocketInteractionContext>
             return;
         
         var track = await _audioService.Tracks
-            .LoadTrackAsync(link, TrackSearchMode.YouTube)
+            .LoadTrackAsync(query, TrackSearchMode.YouTube)
             .ConfigureAwait(false);
 
         if (track is null)
@@ -67,10 +67,5 @@ public class AudioHandler : InteractionModuleBase<SocketInteractionContext>
             
         await FollowupAsync(errorMessage).ConfigureAwait(false);
         return null;
-    }
-
-    private Task<bool> ValidateLink(string link)
-    {
-        return Task.FromResult(true);
     }
 }
