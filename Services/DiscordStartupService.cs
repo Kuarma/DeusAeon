@@ -1,4 +1,5 @@
 using DeusAeon.LoggingSetup;
+using DeusAeon.OptionBinding;
 using Discord;
 using Discord.WebSocket;
 
@@ -8,9 +9,9 @@ public class DiscordStartupService : IHostedService
 {
     private readonly DiscordSocketClient _client;
     private readonly ILogger<DiscordStartupService> _logger;
-    private readonly IConfiguration _config;
+    private readonly UserSecretsData _config;
     
-    public DiscordStartupService(DiscordSocketClient client, ILogger<DiscordStartupService> logger, IConfiguration config)
+    public DiscordStartupService(DiscordSocketClient client, ILogger<DiscordStartupService> logger, UserSecretsData config)
     {
         _client = client;
         _config = config;
@@ -21,7 +22,7 @@ public class DiscordStartupService : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        await _client.LoginAsync(TokenType.Bot, _config["DiscordBotToken:Token"]);
+        await _client.LoginAsync(TokenType.Bot, _config.DiscordBotToken);
         await _client.StartAsync();
         _logger.LogInformation("Discord bot started");
     }

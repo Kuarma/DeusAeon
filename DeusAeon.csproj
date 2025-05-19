@@ -11,6 +11,7 @@
     <ItemGroup>
       <PackageReference Include="Discord.Net" Version="3.17.4" />
       <PackageReference Include="Lavalink4NET.Discord.NET" Version="4.0.27" />
+      <PackageReference Include="Lavalink4NET.InactivityTracking" Version="4.0.27" />
       <PackageReference Include="libsodium" Version="1.0.20.1" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.5" />
       <PackageReference Include="Opus" Version="1.0.0" />
